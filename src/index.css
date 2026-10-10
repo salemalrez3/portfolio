@@ -1,0 +1,14 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  color: #c9b99b;
+  background: #080706;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.app { position: fixed; inset: 0;overflow: hidden;                    /* crop the excess */
+  perspective: 800px;                  /* camera distance */
+  perspective-origin: 50% 25%;         /* vanishing point at the horizon */ }
+.layer { position: fixed; inset: 0; }

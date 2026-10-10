@@ -1,0 +1,23 @@
+.age-clue {
+  position: absolute;
+    width: 5.5%;   
+  height: 4.5%;  
+  left: 37%;
+  bottom: 4%;
+  z-index: 31;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  transform: rotate(-4deg);
+  appearance: none;
+  background: radial-gradient(circle at 30% 20%, rgba(140, 100, 40, 0.15), transparent 40%), radial-gradient(circle at 70% 80%, rgba(100, 65, 20, 0.12), transparent 45%), linear-gradient(160deg, #ece1b8, #d8c890 55%, #b8a878);
+  box-shadow: 5px 5px 20px 5px black;
+  clip-path: polygon(0% 3%, 8% 1%, 18% 2%, 28% 0%, 38% 2%, 48% 1%, 58% 3%, 68% 1%, 78% 2%, 88% 0%, 100% 3%, 98% 15%, 100% 30%, 99% 45%, 100% 60%, 98% 75%, 100% 90%, 99% 100%, 88% 98%, 78% 100%, 68% 98%, 58% 100%, 48% 98%, 38% 100%, 28% 98%, 18% 100%, 8% 98%, 0% 100%, 2% 88%, 0% 72%, 2% 56%, 0% 40%, 2% 24%, 0% 12%);
+}
+
+.clue-dialog-layer, .vault-dialog-layer { position: fixed; inset: 0; display: grid; place-items: center; }
+.clue-dialog-layer { z-index: 400; }
+.clue-dialog-backdrop { position: absolute; inset: 0; background: rgba(10, 6, 3, 0.78); backdrop-filter: blur(7px); }
+.clue-paper { position: relative; width: min(62vw, 430px); aspect-ratio: 1.35; display: grid; place-items: center; background: linear-gradient(160deg, #ece1b8, #d8c890 55%, #b8a878); clip-path: polygon(0% 3%, 8% 1%, 18% 2%, 28% 0%, 38% 2%, 48% 1%, 58% 3%, 68% 1%, 78% 2%, 88% 0%, 100% 3%, 98% 15%, 100% 30%, 99% 45%, 100% 60%, 98% 75%, 100% 90%, 99% 100%, 88% 98%, 78% 100%, 68% 98%, 58% 100%, 48% 98%, 38% 100%, 28% 98%, 18% 100%, 8% 98%, 0% 100%, 2% 88%, 0% 72%, 2% 56%, 0% 40%, 2% 24%, 0% 12%); box-shadow: 0 20px 70px rgba(0, 0, 0, 0.75); }
+.clue-paper-time { color: rgba(45, 26, 6, 0.86); font: 700 clamp(3rem, 10vw, 5.5rem) Georgia, serif; letter-spacing: 0.08em; }
+.clue-dialog-close { position: absolute; top: 20px; right: 24px; border: 0; background: transparent; color: rgba(45, 26, 6, 0.7); cursor: pointer; font-size: 20px; }

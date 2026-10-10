@@ -1,0 +1,183 @@
+/* Draggable lighter and reveal hint */
+.lighter {
+  position: absolute;
+  right: 60px;
+  bottom: 90px;
+  z-index: 10;
+  width: 60px;
+  height: 110px;
+  cursor: grab;
+  touch-action: none;
+  filter: sepia(0.25);
+}
+
+.lighter:active {
+  cursor: grabbing;
+}
+
+.lighter-flame {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 30px;
+  height: 44px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 161, 63, 0.45));
+}
+
+.flame-inner,
+.flame-outer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50% 50% 40% 40%;
+}
+
+.flame-outer {
+  width: 26px;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    rgba(255, 200, 100, 0.9) 0%,
+    rgba(255, 140, 40, 0.7) 40%,
+    rgba(255, 80, 20, 0.3) 70%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: flicker 0.12s infinite alternate;
+}
+
+.flame-inner {
+  width: 12px;
+  height: 22px;
+  background: radial-gradient(
+    ellipse at 50% 80%,
+    rgba(255, 255, 220, 1) 0%,
+    rgba(255, 220, 120, 0.9) 45%,
+    transparent 90%
+  );
+  filter: blur(1px);
+  animation: flicker 0.09s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1.08, 0.94);
+    opacity: 1;
+  }
+}
+
+.lighter-lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 56px;
+  height: 26px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(42, 24, 12, 0.75);
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+  background:
+    linear-gradient(180deg, rgba(255, 220, 170, 0.5) 0%, transparent 40%),
+    linear-gradient(180deg, #e0bd78 0%, #a8783f 38%, #5b351b 72%, #2b170d 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 234, 172, 0.8),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.7),
+    0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.lighter-body {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 86px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(42, 24, 12, 0.8);
+  border-radius: 3px 3px 7px 7px;
+  background:
+    linear-gradient(90deg, rgba(255, 234, 172, 0.22), transparent 18%),
+    repeating-linear-gradient(90deg, rgba(48, 24, 9, 0.11) 0 1px, transparent 1px 5px),
+    linear-gradient(180deg, #c69b5e 0%, #926337 48%, #4b2918 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 170, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5),
+    0 7px 16px rgba(0, 0, 0, 0.75),
+    inset 0 0 9px rgba(37, 17, 6, 0.45);
+}
+
+.lighter-engraving {
+  color: rgba(60, 40, 20, 0.7);
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transform: rotate(-8deg);
+  text-shadow:
+    0 1px 0 rgba(255, 220, 170, 0.4),
+    0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.lighter::after {
+  content: "";
+  position: absolute;
+  top: 37px;
+  left: 8px;
+  width: 44px;
+  height: 1px;
+  background: rgba(255, 220, 150, 0.3);
+  box-shadow: 0 3px 0 rgba(45, 22, 9, 0.35), 0 6px 0 rgba(255, 220, 150, 0.16);
+  pointer-events: none;
+}
+
+.lighter-hint {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  color: rgba(255, 200, 140, 0.5);
+  pointer-events: none;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff9d4d;
+  box-shadow: 0 0 8px #ff9d4d;
+  animation: hintPulse 1.6s infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .lighter {
+    right: 30px;
+    bottom: 60px;
+  }
+}

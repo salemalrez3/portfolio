@@ -1,0 +1,187 @@
+.app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 149.25vw;         /* 100 / 0.67 */
+  height: 149.25vh;        /* 100 / 0.67 */
+  transform: scale(0.67);
+  transform-origin: top left;
+  background-color: aqua;
+  overflow: hidden;
+}
+
+.room {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #080706;
+}
+
+.wall {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #171311;
+  background-image: url("image.png");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 500px 500px;
+}
+
+.wall::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(111, 78, 48, 0.14), rgba(0, 0, 0, 0.7));
+  content: "";
+  pointer-events: none;
+}
+
+.baseboard {
+  position: absolute;
+  right: 0;
+  bottom: 25%;
+  left: 0;
+  z-index: 15;
+  height: 1%;
+  background: rgba(181, 102, 56, 0.598);
+  box-shadow: inset 0 1px 0 rgba(255, 200, 140, 0.15), inset 0 -2px 3px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.ground {
+  position: absolute;
+  right: -50%;
+  bottom: 0;
+  left: -50%;
+  z-index: 20;
+  height: 41%;
+  background-color: #050505;
+  background-image: url("Texturelabs_Wood_227M.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 650px 600px;
+  transform: perspective(900px) rotateX(35deg);
+  transform-origin: bottom center;
+}
+
+.cabinet-holder {
+  position: absolute;
+  bottom: 12%;
+  left: 55%;
+  z-index: 40;
+  transform: perspective(1000px) rotateY(0deg) scale(0.7);
+  transform-origin: bottom left;
+}
+
+.junction-shadow {
+  position: absolute;
+  top: 75%;
+  right: 0;
+  left: 0;
+  z-index: 25;
+  height: 18%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.15) 35%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.35) 65%, transparent);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.lamp {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: radial-gradient(circle at 12% 15%, rgba(251, 170, 72, 0.1), rgba(140, 69, 18, 0.4) 25%, rgba(0, 0, 0, 0.615) 40%);
+  pointer-events: none;
+}
+
+.job-map-page {
+  min-height: 100%;
+  overflow: auto;
+  padding: 72px 144px 108px;
+  color: #e8dcc0;
+  background: radial-gradient(circle at 70% 15%, rgba(161, 92, 37, 0.24), transparent 35%), linear-gradient(135deg, #21130d, #080504 70%);
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+.job-map-back {
+  padding: 10px 14px;
+  border: 1px solid rgba(224, 178, 110, 0.35);
+  background: transparent;
+  color: #d7b278;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.job-map-kicker,
+.job-map-period {
+  color: #bd8651;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.job-map-page h1 {
+  max-width: 760px;
+  margin-top: 108px;
+  color: #f0d19a;
+  font-family: Georgia, serif;
+  font-size: 128px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.job-map-intro {
+  max-width: 520px;
+  margin-top: 28px;
+  color: rgba(232, 220, 192, 0.7);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.job-map-list {
+  max-width: 780px;
+  margin-top: 90px;
+  border-top: 1px solid rgba(224, 178, 110, 0.3);
+}
+
+.job-map-entry {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(224, 178, 110, 0.2);
+}
+
+.job-map-number {
+  color: #8e5a34;
+  font-size: 13px;
+}
+
+.job-map-entry h2 {
+  margin: 8px 0 4px;
+  color: #f0d19a;
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.job-map-entry h3,
+.job-map-entry > div > p:last-child {
+  color: rgba(232, 220, 192, 0.65);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@media (max-width: 720px) {
+  .job-map-page {
+    padding: 32px 24px 80px;
+  }
+
+  .job-map-page h1 {
+    margin-top: 96px;
+  }
+}

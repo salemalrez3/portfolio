@@ -1,0 +1,591 @@
+/* =========================================================
+   VAULT SHELL
+   ========================================================= */
+.vault {
+  position: absolute;
+  left: 57%;
+  bottom: 43%;
+  z-index: 60;
+  width: 170px;
+  height: 210px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  filter: drop-shadow(10px 14px 18px rgba(0, 0, 0, 0.75));
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+.vault:focus-visible {
+  outline: 2px solid #c1c6c4;
+  outline-offset: 6px;
+}
+
+/* =========================================================
+   INTERIOR CAVITY
+   ========================================================= */
+.vault-interior {
+  position: absolute;
+  inset: 16px 16px 30px;
+  z-index: 1;
+  overflow: hidden;
+  border: 8px solid #12161a;
+  border-radius: 5px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(70, 80, 85, 0.25) 0%, transparent 55%),
+    linear-gradient(180deg, #0c0e0e 0%, #050606 100%);
+  box-shadow:
+    inset 0 20px 40px rgba(0, 0, 0, 0.98),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.9),
+    0 0 0 2px #2a2f30;
+}
+
+.vault-interior-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% -10%,
+    rgba(180, 190, 175, 0.22) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* =========================================================
+   SHELF — holds the cassettes
+   ========================================================= */
+.vault-shelf {
+  position: absolute;
+  inset: 22px 14px 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 10px 8px;
+  padding: 14px 10px 12px;
+  border: 2px solid #050707;
+  background: linear-gradient(180deg, #262b2b 0%, #0c0e0e 85%);
+  box-shadow:
+    inset 0 0 22px #020303,
+    0 5px 0 #050707;
+}
+
+/* =========================================================
+   CASSETTE
+   ========================================================= */
+.vault-cassette {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+/* The plastic shell */
+.cassette-shell {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 12%,
+      transparent 88%,
+      rgba(0, 0, 0, 0.55) 100%
+    ),
+    linear-gradient(
+      90deg,
+      #0a0c0c 0%,
+      #24282c 12%,
+      #383c40 50%,
+      #1e2226 88%,
+      #070909 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    1px 1px 2px rgba(0, 0, 0, 0.9);
+  padding: 8% 7% 6%;
+  gap: 4%;
+  overflow: hidden;
+}
+
+/* Corner screws */
+.cassette-screw {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #d7dcdc 0%,
+    #6c7274 45%,
+    #22282a 100%
+  );
+  box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.7);
+  top: 5%;
+  z-index: 2;
+}
+.cassette-screw-tl { left: 5%; }
+.cassette-screw-tr { right: 5%; }
+
+/* Paper label across the middle */
+.cassette-paper {
+  position: relative;
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5% 6%;
+  background: linear-gradient(180deg, #f3e9ca 0%, #ded1a6 55%, #cbbd8e 100%);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 2px rgba(90, 60, 20, 0.25),
+    0 0 0 1px rgba(30, 18, 5, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.cassette-cat {
+  width: 40%;
+  height: 2px;
+  border-radius: 1px;
+  margin-bottom: 4px;
+  background: #c99743;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.vault-cassette[data-cat="work"]      .cassette-cat { background: #c99743; }
+.vault-cassette[data-cat="volunteer"] .cassette-cat { background: #b5453a; }
+.vault-cassette[data-cat="hobbies"]   .cassette-cat { background: #6f8a66; }
+
+.cassette-name {
+  width: 100%;
+  text-align: center;
+  font-family: "JetBrains Mono", "SF Mono", "Courier New", monospace;
+  font-size: clamp(7.5px, 0.7vw + 2px, 10.5px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  color: #1a0f02;
+  text-transform: uppercase;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Bottom band — two reel windows */
+.cassette-reels {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8%;
+  background:
+    linear-gradient(180deg, #1c2024 0%, #0c0e10 100%);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.7);
+}
+
+.reel {
+  position: relative;
+  width: 55%;
+  max-width: 26px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      #050606 0%,
+      #0a0c0c 55%,
+      #050606 100%
+    );
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.9),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.85);
+}
+
+.reel-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #c9cecd 0%,
+      #7a8082 45%,
+      #3a3f41 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
+   VAULT DOOR — brushed steel, closed = covering interior
+   ========================================================= */
+.vault-door {
+  position: absolute;
+  inset: 0 0 30px;
+  z-index: 4;
+  border: 8px solid #22262a;
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.06) 0 1px,
+      transparent 1px 9px
+    ),
+    linear-gradient(
+      105deg,
+      #7a8082 0%,
+      #3a3f41 42%,
+      #656b6d 68%,
+      #2a2e30 100%
+    );
+   transform-origin: left center;   /* was 50% 100% */
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.55),
+    inset 4px 0 8px rgba(255, 255, 255, 0.04),
+    inset -4px 0 8px rgba(0, 0, 0, 0.4),
+    0 0 0 2px #14181a,
+    0 6px 0 #0f1214;
+}
+
+/* Corner rivets */
+.vault-rivet {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #d7dcdc 0%,
+    #6c7274 45%,
+    #22282a 100%
+  );
+  box-shadow:
+    inset -1px -1px 1px rgba(0, 0, 0, 0.65),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.35),
+    0 1px 1px rgba(0, 0, 0, 0.7);
+}
+.vault-rivet-tl { top: 10px; left: 10px; }
+.vault-rivet-tr { top: 10px; right: 10px; }
+.vault-rivet-bl { bottom: 10px; left: 10px; }
+.vault-rivet-br { bottom: 10px; right: 10px; }
+
+/* Top nameplate */
+.vault-plate {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.42em;
+  color: #c8cdcb;
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.8),
+    0 -1px 0 rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, #3a3f41, #1c2022);
+  border: 1px solid #0e1112;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.65);
+  white-space: nowrap;
+}
+
+/* Keypad */
+.vault-keypad {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100px;
+  padding: 12px 10px;
+  border: 2px solid #171b1c;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #14181a 0%, #0a0d0e 100%);
+  box-shadow:
+    inset 0 0 12px #000,
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.vault-keypad span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #b8bebc, #4e5455);
+  color: #0d0f10;
+  font-size: 9px;
+  font-weight: 800;
+  font-family: "Courier New", monospace;
+  box-shadow:
+    0 1px 1px #000,
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+.vault-keypad span.is-blank {
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* Handle — vertical lever on the right */
+.vault-handle {
+  position: absolute;
+  right: 34px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 68px;
+  border-radius: 4px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      transparent 45%,
+      rgba(0, 0, 0, 0.55) 100%
+    ),
+    linear-gradient(180deg, #c9cecd 0%, #7a8082 45%, #3a3f41 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.6),
+    2px 3px 6px rgba(0, 0, 0, 0.75);
+}
+.vault-handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #7a8082, #1a1e20);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* Base plinth */
+.vault-base {
+  position: absolute;
+  right: -8px;
+  bottom: 0;
+  left: -8px;
+  z-index: 3;
+  height: 34px;
+  border: 2px solid #12161a;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(180deg, #4b5255 0%, #1e2224 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Bottom hinges */
+.vault-hinge {
+  position: absolute;
+  bottom: 8px;
+  z-index: 5;
+  width: 34px;
+  height: 16px;
+  border: 1px solid #12161a;
+  border-radius: 3px;
+  background:
+    linear-gradient(
+      180deg,
+      #bdc2c1 0%,
+      #5c6263 45%,
+      #2a2e30 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.7);
+}
+.vault-hinge-left  { left: 56px;  }
+.vault-hinge-right { right: 56px; }
+
+/* =========================================================
+   DIALOG
+   ========================================================= */
+.vault-dialog-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 410;
+  display: grid;
+  place-items: center;
+}
+
+.vault-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 4, 2, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.vault-dialog {
+  position: relative;
+  width: min(90vw, 560px);
+  padding: 54px clamp(24px, 5vw, 56px) 46px;
+  border: 1px solid rgba(150, 160, 160, 0.42);
+  border-radius: 4px;
+  background: linear-gradient(145deg, #2c3030, #0d1010 72%);
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.85);
+  color: #d4d8d5;
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+.vault-dialog-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  border: 1px solid #646b6b;
+  background: transparent;
+  color: #c1c6c4;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px 8px;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.vault-dialog-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffd9a0;
+}
+
+.vault-lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vault-kicker {
+  color: #aeb5b3;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.vault-dialog h2 {
+  margin: 14px 0 10px;
+  color: #d9ddda;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  font-weight: 400;
+}
+
+.vault-lock p {
+  max-width: 320px;
+  margin-bottom: 24px;
+  color: rgba(212, 216, 213, 0.65);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.vault-lock input {
+  width: 160px;
+  padding: 10px;
+  border: 1px solid #7d8583;
+  outline: none;
+  background: #111414;
+  color: #e2e5e1;
+  font: inherit;
+  font-size: 24px;
+  letter-spacing: 0.35em;
+  text-align: center;
+}
+
+.vault-submit {
+  margin-top: 18px;
+  padding: 11px 20px;
+  border: 1px solid #7d8583;
+  background: #3b4141;
+  color: #d9ddda;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.vault-submit:hover {
+  background: #4d5353;
+}
+
+.vault-error {
+  margin-top: 13px;
+  color: #df8064;
+  font-size: 11px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 720px) {
+  .vault {
+    left: 31%;
+    bottom: 39%;
+    width: 40vw;
+    height: 31vw;
+  }
+  .vault-shelf {
+    gap: 6px 5px;
+    padding: 10px 8px 9px;
+  }
+  .cassette-name {
+    font-size: 7px;
+  }
+  .vault-keypad {
+    width: 90px;
+    padding: 8px;
+    gap: 4px;
+  }
+  .vault-keypad span {
+    width: 20px;
+    height: 16px;
+    font-size: 7px;
+  }
+  .vault-handle {
+    right: 20px;
+    height: 52px;
+  }
+  .vault-plate {
+    font-size: 7px;
+    letter-spacing: 0.3em;
+  }
+}

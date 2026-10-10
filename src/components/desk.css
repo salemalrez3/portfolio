@@ -1,0 +1,304 @@
+/* =========================================================
+   DESK SCENE
+   ========================================================= */
+.desk-scene {
+  position: absolute;
+  left: 66%;
+  bottom: 5%;
+  width: 560px;
+  height: 280px;
+  transform: translateX(-50%);
+  z-index: 60;
+  pointer-events: none;
+  filter: drop-shadow(18px 22px 18px rgba(0, 0, 0, 0.85));
+}
+
+/* =========================================================
+   DESK  — solid back panel, no drawers
+   ========================================================= */
+.desk {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 74%;
+  z-index: 1;
+}
+
+/* Desktop slab (thin sliver of top edge visible) */
+.desk-surface {
+  position: absolute;
+  top: 0;
+  left: -3%;
+  width: 106%;
+  height: 8%;
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 6px,
+      rgba(0, 0, 0, 0.07) 6px 7px
+    ),
+    linear-gradient(180deg, rgba(240, 200, 140, 0.4), transparent 42%),
+    linear-gradient(180deg, #7a5330 0%, #4a2f18 55%, #26150a 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(240, 200, 140, 0.5),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.55),
+    0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Solid back panel */
+.desk-back {
+  position: absolute;
+  top: 8%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0 0 3px 3px;
+  background:
+    /* vertical grain */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 9px,
+      rgba(0, 0, 0, 0.08) 9px 10px
+    ),
+    /* darkening toward floor */
+    linear-gradient(180deg, #4a2f18 0%, #3a2410 55%, #160b04 100%);
+  box-shadow:
+    inset 0 0 0 3px #100803,
+    inset 0 0 0 6px rgba(150, 100, 55, 0.15),
+    inset 0 -20px 26px rgba(0, 0, 0, 0.7),
+    0 8px 14px rgba(0, 0, 0, 0.65);
+}
+
+/* Subtle inset framed panel detail */
+.desk-back-panel {
+  position: absolute;
+  inset: 14% 8% 12% 8%;
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(200, 155, 95, 0.12),
+    0 1px 0 rgba(200, 155, 95, 0.08);
+}
+
+/* =========================================================
+   CHAIR  — behind desk, viewed from behind, slight tilt
+   ========================================================= */
+.desk-chair {
+  position: absolute;
+  top: -10%;
+  left: 24%;
+  width: 30%;
+  height: 100%;
+  z-index: 0;
+  transform-origin: 50% 100%;
+}
+
+/* --- Wooden back frame (top rail + slat housing) --- */
+.chair-frame {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 58%;
+  display: grid;
+  grid-template-rows: 16% 1fr;
+  border-radius: 16px 16px 6px 6px;
+  background: rgba(255, 255, 255, 0);
+  box-shadow:
+    inset 0 3px 0 rgba(230, 190, 130, 0.22),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.55),
+    0 6px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.chair-top-rail {
+  background: linear-gradient(180deg, #5a3a1e, #3a2210);
+  box-shadow: inset 0 2px 0 rgba(240, 200, 140, 0.3);
+  z-index: 1;
+}
+
+.chair-slats {
+  z-index: 0;
+  display: flex;
+  align-items: flex-end;   /* middle slats anchor to bottom */
+  gap: 10%;
+  padding: 0 0% 11%;       /* no top padding — edge slats touch the rail */
+  background: rgba(255, 255, 255, 0);
+}
+
+/* Middle slats: thinner, with a gap below the top rail */
+.chair-slat {
+  flex: 0.65;
+  align-self: flex-end;
+  height: 100%;             /* leaves a gap under the rail */
+  border-radius: 2px;
+ background: linear-gradient(180deg, #5a3a1e, #3a2210);
+  box-shadow:
+    inset -1px 0 0 rgba(0, 0, 0, 0.45),
+    inset 1px 0 0 rgba(0, 0, 0, 0.45);
+}
+
+/* Edge slats: thicker, full height so they weld to the top rail */
+.chair-slat-edge {
+  flex: 1;
+  align-self: stretch;
+  height: 100%;
+  border-radius: 0 0 2px 2px;   /* square top so it merges with the rail */
+  background: linear-gradient(180deg, #4a2c17 0%, #2a180a 100%);
+  box-shadow:
+    inset -1px 0 0 rgba(0, 0, 0, 0.45),
+    inset 1px 0 0 rgba(0, 0, 0, 0.45);
+}
+
+/* --- Green leather cushion (visible below frame) --- */
+.chair-cushion {
+  position: absolute;
+  top: 56%;
+  left: 3%;
+  right: 3%;
+  height: 14%;
+  border-radius: 6px 6px 4px 4px;
+  background:
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(120, 200, 130, 0.22),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #2f5a34 0%, #1e3e22 55%, #0f2312 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(160, 220, 170, 0.25),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.6),
+    0 3px 6px rgba(0, 0, 0, 0.55);
+}
+
+/* --- Armrests (dark wood, protruding sideways) --- */
+.chair-arm {
+  position: absolute;
+  top: 48%;
+  width: 22%;
+  height: 6%;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #4a2c17 0%, #2a180a 70%, #150a04 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(210, 165, 105, 0.28),
+    0 3px 5px rgba(0, 0, 0, 0.55);
+}
+.chair-arm-left {
+  left: 0;
+  transform: rotate(-4deg);
+}
+.chair-arm-right {
+  right: 0;
+  transform: rotate(4deg);
+}
+
+/* --- Center column --- */
+.chair-column {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  width: 9%;
+  height: 22%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #050505,
+    #4a4a4a 45%,
+    #1a1a1a 55%,
+    #050505
+  );
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* --- 5-star base with casters --- */
+.chair-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 76%;
+  height: 12%;
+  transform: translateX(-50%);
+}
+
+/* Hub at center of the star */
+.chair-base::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 12%;
+  height: 24%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+}
+
+/* Spokes (5 arranged like a star, drawn as thin angled bars) */
+.chair-base::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    /* far left spoke */
+    linear-gradient(75deg, transparent 46%, #0a0a0a 46% 54%, transparent 54%) 0
+      55% / 32% 8% no-repeat,
+    /* left-mid spoke */
+    linear-gradient(85deg, transparent 46%, #0a0a0a 46% 54%, transparent 54%)
+      18% 55% / 30% 8% no-repeat,
+    /* center spoke */ linear-gradient(90deg, #0a0a0a, #0a0a0a) 50% 52% / 3% 90%
+      no-repeat,
+    /* right-mid spoke */
+    linear-gradient(-85deg, transparent 46%, #0a0a0a 46% 54%, transparent 54%)
+      52% 55% / 30% 8% no-repeat,
+    /* far right spoke */
+    linear-gradient(-75deg, transparent 46%, #0a0a0a 46% 54%, transparent 54%)
+      68% 55% / 32% 8% no-repeat;
+}
+
+/* Casters (small dark wheels at the tips of the spokes) */
+.chair-caster {
+  position: absolute;
+  bottom: 0;
+  width: 9%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #3a3a3a, #050505 75%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.chair-caster-1 {
+  left: 0;
+  bottom: 6%;
+}
+.chair-caster-2 {
+  left: 24%;
+  bottom: 0;
+}
+.chair-caster-3 {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.chair-caster-4 {
+  right: 24%;
+  bottom: 0;
+}
+.chair-caster-5 {
+  right: 0;
+  bottom: 6%;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 720px) {
+  .desk-scene {
+    left: 56%;
+    width: 46vw;
+    height: 40vw;
+  }
+}

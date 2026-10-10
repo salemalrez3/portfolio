@@ -1,0 +1,436 @@
+/* =========================================================
+   TV SCENE
+   ========================================================= */
+.television-scene {
+  position: absolute;
+  right: 5%;
+  bottom: 17%;
+  z-index: 40;
+  width: 245px;
+  height: 300px;
+  filter: drop-shadow(16px 22px 18px rgba(0, 0, 0, 0.85));
+}
+
+/* =========================================================
+   TV BODY
+   ========================================================= */
+.television {
+  position: absolute;
+  top: 0;
+  left: 3%;
+  width: 92%;
+  height: 54%;
+  padding: 14px 14px 20px;
+  border: 6px solid #1a140f;
+  border-radius: 18px 18px 8px 8px;
+  background: linear-gradient(135deg, #6b5a48, #2c2419 68%, #15110d);
+  box-shadow:
+    inset 0 2px rgba(230, 198, 148, 0.22),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.55),
+    0 4px 0 #0d0a07;
+  z-index: 0;
+  
+}
+
+.television-screen {
+  position: relative;
+  height: 74%;
+  overflow: hidden;
+  border: 7px solid #120f0d;
+  border-radius: 14px;
+  background: #101010;
+  box-shadow: inset 0 0 18px #000,
+    0 0 100px -30px white
+  ; 
+}
+
+.television-screen::after {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 32px 6px rgba(0, 0, 0, 1),
+    inset 0 0 4px 2px rgba(255, 255, 255, 0.16);
+    
+  content: "";
+  pointer-events: none;
+}
+
+.static-noise {
+  position: absolute;
+  inset: -40%;
+  opacity: 0.9;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.85'/%3E%3C/svg%3E");
+  animation: static-jump 0.12s steps(2) infinite;
+  filter: grayscale(1) contrast(1.8);
+}
+
+.static-label {
+  position: absolute;
+  top: 47%;
+  left: 0;
+  right: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-shadow: 0 0 5px #fff;
+}
+
+.tv-preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #e0d5bc;
+  text-align: center;
+  text-shadow: 0 2px 8px #000;
+}
+
+.tv-preview-work {
+  background: linear-gradient(135deg, #14252b, #735a35 52%, #171719);
+}
+.tv-preview-volunteer {
+  background: linear-gradient(135deg, #263d38, #9b7951 50%, #202523);
+}
+.tv-preview-hobbies {
+  background: linear-gradient(135deg, #34233d, #9b6444 50%, #15151a);
+}
+
+.tv-preview-title {
+  max-width: 80%;
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.tv-preview-caption {
+  font-family: monospace;
+  font-size: 7px;
+  letter-spacing: 0.16em;
+}
+
+@keyframes static-jump {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(7%, -5%); }
+}
+
+/* =========================================================
+   TV CONTROL PANEL
+   ========================================================= */
+.television-controls {
+  position: absolute;
+  right: 10px;
+  bottom: 7px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.television-knob {
+  width: 13px;
+  height: 13px;
+  border: 2px solid #15110e;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d2b17b, #493a2c 65%);
+}
+
+.television-speaker {
+  flex: 1;
+  height: 11px;
+  background: repeating-linear-gradient(
+    90deg,
+    #17120e 0 2px,
+    transparent 2px 5px
+  );
+}
+
+/* =========================================================
+   VHS PLAYER (sits flush on the cabinet top)
+   ========================================================= */
+.media-player {
+  position: absolute;
+  top: 53%;
+  left: 0%;
+  width: 100%;
+  height: 11%;
+  border: 4px solid #171717;
+  border-radius: 3px 3px 5px 5px;
+  background: linear-gradient(#5e5e5e, #1f1f1f);
+  box-shadow:
+    inset 0 2px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.55),
+    0 3px 5px #000;
+  z-index: 0;
+}
+
+.media-player.is-playing {
+  box-shadow:
+    inset 0 2px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.55),
+    0 3px 5px #000,
+    0 0 12px rgba(194, 55, 40, 0.4);
+}
+
+.player-slot {
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  width: 55%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #161616;
+  background: #090909;
+  color: #cf5c48;
+  font: 700 7px monospace;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+.player-light {
+  position: absolute;
+  top: 38%;
+  right: 16%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #be3d2e;
+  box-shadow: 0 0 8px #d8543f;
+}
+
+.player-button {
+  position: absolute;
+  right: 5%;
+  bottom: 19%;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: #b0a58f;
+}
+
+/* =========================================================
+   WOODEN CONSOLE CABINET (replaces the flimsy bench)
+   ========================================================= */
+.television-stand {
+  position: absolute;
+  top: 64%;
+  left: 0;
+  width: 100%;
+  height: 36%;
+  z-index: 2;
+}
+
+/* Cabinet body */
+.television-stand::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 10% 0;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #523621 0%, #321f11 55%, #1c1108 100%);
+  box-shadow:
+    inset 0 0 0 3px #150c05,
+    inset 0 4px 0 rgba(220, 175, 115, 0.3),
+    inset 0 -12px 16px rgba(0, 0, 0, 0.55),
+    0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Warm highlight across the top surface */
+.television-stand::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, rgba(220, 175, 115, 0.4), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Two-door front panel (center seam drawn with a gradient) */
+.stand-shelf {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  right: 6%;
+  bottom: 22%;
+  border-radius: 2px;
+  background:
+    /* center seam */
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      #140a04 calc(50% - 1px),
+      #140a04 calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    /* door face */
+    linear-gradient(90deg, #3a2211 0%, #5a3820 50%, #2a170a 100%);
+  box-shadow:
+    inset 0 0 0 2px #140a04,
+    inset 0 2px 0 rgba(220, 175, 115, 0.16),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+/* Brass door knobs */
+.stand-shelf::before,
+.stand-shelf::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e0bd7f, #6b4a26 75%);
+  box-shadow: 0 0 0 2px #140a04;
+  transform: translateY(-50%);
+}
+
+.stand-shelf::before { right: calc(50% + 8px); }
+.stand-shelf::after  { left:  calc(50% + 8px); }
+
+/* Short base feet */
+.stand-leg {
+  position: absolute;
+  bottom: 0;
+  width: 8%;
+  height: 11%;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(180deg, #1a0f06, #0a0603);
+  transform: none;
+  z-index: 1;
+}
+
+.stand-leg-left  { left: 8%; }
+.stand-leg-right { right: 8%; }
+
+/* =========================================================
+   FULLSCREEN PLAYBACK (unchanged)
+   ========================================================= */
+.tv-playback {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  background: #050505;
+  animation: playback-fade-in 0.35s ease-out;
+}
+
+.playback-screen {
+  position: relative;
+  width: 1050px;
+  height: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  overflow: hidden;
+  border: 22px solid #171818;
+  border-radius: 28px;
+  color: #e9e1cf;
+  text-align: center;
+  box-shadow:
+    0 0 0 4px #484a47,
+    0 0 100px rgba(205, 180, 130, 0.15),
+    inset 0 0 70px rgba(0, 0, 0, 0.8);
+}
+
+.tv-playback-work .playback-screen {
+  background: linear-gradient(135deg, #13242c, #92734a 52%, #13171a);
+}
+.tv-playback-volunteer .playback-screen {
+  background: linear-gradient(135deg, #1d3b36, #a27b4e 50%, #17211e);
+}
+.tv-playback-hobbies .playback-screen {
+  background: linear-gradient(135deg, #352340, #a56847 50%, #13151a);
+}
+
+.playback-image-solution-soft .playback-screen,
+.playback-image-titan-tech .playback-screen {
+  background:
+    linear-gradient(135deg, rgba(13, 33, 42, 0.55), rgba(154, 120, 72, 0.5)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 24px),
+    #18323d;
+}
+.playback-image-iedc .playback-screen {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(218, 178, 93, 0.6), transparent 18%),
+    linear-gradient(135deg, #17291f, #9f7947 50%, #19231e);
+}
+.playback-image-meddit .playback-screen {
+  background:
+    linear-gradient(135deg, rgba(40, 17, 50, 0.7), rgba(166, 91, 65, 0.55)),
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(255, 255, 255, 0.08) 19px),
+    #38234a;
+}
+.playback-image-relief .playback-screen {
+  background:
+    radial-gradient(ellipse at 48% 38%, rgba(224, 196, 132, 0.6), transparent 22%),
+    linear-gradient(135deg, #21423d, #9f825d 50%, #1c2b26);
+}
+.playback-image-startup-icpc .playback-screen {
+  background:
+    linear-gradient(135deg, rgba(14, 35, 42, 0.4), rgba(215, 130, 73, 0.45)),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 18px),
+    #32434a;
+}
+.playback-image-personal .playback-screen {
+  background:
+    radial-gradient(circle at 50% 40%, rgba(207, 139, 100, 0.65), transparent 20%),
+    linear-gradient(135deg, #3d2745, #aa6e50 50%, #171821);
+}
+
+.playback-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.045) 4px);
+  pointer-events: none;
+}
+
+.playback-kicker {
+  font: 10px monospace;
+  letter-spacing: 0.25em;
+}
+.playback-screen h1 {
+  max-width: 80%;
+  font: 400 96px Georgia, serif;
+}
+.playback-screen p {
+  font: 12px monospace;
+  opacity: 0.7;
+}
+.playback-screen button {
+  margin-top: 20px;
+  padding: 11px 18px;
+  border: 1px solid rgba(232, 220, 192, 0.5);
+  background: rgba(0, 0, 0, 0.35);
+  color: #e9e1cf;
+  cursor: pointer;
+  font: 11px monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@keyframes playback-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .television-scene {
+    right: 3%;
+    width: 340px;
+    height: 415px;
+  }
+}

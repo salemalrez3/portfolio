@@ -1,0 +1,253 @@
+/* Dialog shell */
+.paper-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 290;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.paper-dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 300;
+  width: min(58vw, 600px);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(60, 30, 10, 0.55) 0%, transparent 55%),
+    linear-gradient(180deg, #0f0905 0%, #050302 100%);
+  border-left: 1px solid rgba(255, 200, 140, 0.14);
+  box-shadow:
+    -40px 0 80px rgba(0, 0, 0, 0.9),
+    inset 1px 0 0 rgba(255, 200, 140, 0.06);
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+}
+
+.dialog-backlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 55% 42%,
+    rgba(255, 180, 90, 0.18) 0%,
+    rgba(255, 140, 60, 0.05) 35%,
+    transparent 65%
+  );
+}
+
+.dialog-scene {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 80px 40px 120px;
+  perspective: 1400px;
+}
+
+.held-paper {
+  position: relative;
+  width: 340px;
+  height: 460px;
+  transform-style: preserve-3d;
+  box-shadow:
+    24px 34px 70px rgba(0, 0, 0, 0.85),
+    0 0 120px rgba(255, 170, 90, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+
+.held-paper-surface {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(120, 80, 30, 0.14), transparent 42%),
+    radial-gradient(circle at 78% 72%, rgba(100, 65, 20, 0.12), transparent 48%),
+    radial-gradient(circle at 50% 100%, rgba(80, 50, 10, 0.16), transparent 65%),
+    linear-gradient(160deg, #efe3bc 0%, #ddcfa2 60%, #c9ba8a 100%);
+  box-shadow:
+    inset 0 0 40px rgba(90, 60, 20, 0.22),
+    inset 0 0 4px rgba(120, 80, 30, 0.4);
+}
+
+.held-paper-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 32px;
+  color: rgba(45, 26, 6, 0.7);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.28em;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(90deg);
+}
+
+/* Dialog paper variants */
+.held-paper.paper-note .held-paper-surface {
+  background: linear-gradient(160deg, #f4e8a8 0%, #e6d678 70%, #d6c25a 100%);
+}
+
+.held-paper.paper-photo .held-paper-surface {
+  padding: 12px;
+  background: linear-gradient(160deg, #f6f0e0 0%, #e0d8c4 100%);
+}
+
+.held-paper.paper-photo .held-paper-surface::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  background: linear-gradient(160deg, #4a4030, #241c10);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.65);
+}
+
+.held-paper.paper-receipt .held-paper-surface {
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg, #f4eed8, #ddd6bb);
+}
+
+.held-paper.paper-torn .held-paper-surface {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(140, 100, 40, 0.16), transparent 42%),
+    radial-gradient(circle at 70% 80%, rgba(100, 65, 20, 0.14), transparent 48%),
+    linear-gradient(160deg, #ece1b8, #d8c890 55%, #b8a878);
+}
+
+.held-paper.curl-br .held-paper-surface::before,
+.held-paper.curl-bl .held-paper-surface::before,
+.held-paper.curl-tl .held-paper-surface::before,
+.held-paper.curl-tr .held-paper-surface::before {
+  width: 52px;
+  height: 52px;
+}
+
+/* Secret reveal */
+.held-paper-secret {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 70px 40px 40px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.held-paper-secret.is-revealed {
+  opacity: 1;
+}
+
+.secret-stamp {
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(80, 190, 230, 0.35);
+  color: rgba(80, 190, 230, 0.85);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(100, 210, 250, 0.7);
+}
+
+.held-paper-secret p {
+  color: rgba(120, 210, 245, 0.95);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 8px rgba(100, 200, 240, 0.65),
+    0 0 20px rgba(60, 160, 220, 0.45);
+}
+
+.uv-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(80, 180, 230, 0.18) 0%,
+    rgba(60, 140, 200, 0.06) 40%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.uv-wash.is-on {
+  opacity: 1;
+}
+
+.reveal-progress {
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  left: 26px;
+  height: 3px;
+  overflow: hidden;
+  background: rgba(55, 35, 18, 0.3);
+}
+
+.reveal-progress-fill {
+  height: 100%;
+  background: #b8dff0;
+  box-shadow: 0 0 10px rgba(130, 215, 250, 0.9);
+  transition: width 0.05s linear;
+}
+
+/* Dialog controls */
+.paper-dialog-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 20;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 200, 140, 0.28);
+  border-radius: 3px;
+  background: transparent;
+  color: rgba(255, 200, 140, 0.75);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.paper-dialog-close:hover {
+  background: rgba(255, 200, 140, 0.1);
+  color: #ff9d4d;
+}
+
+.paper-dialog-stamp {
+  position: absolute;
+  top: 22px;
+  left: 28px;
+  color: rgba(255, 200, 140, 0.45);
+  pointer-events: none;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .paper-dialog {
+    width: 100vw;
+  }
+
+  .held-paper {
+    width: 280px;
+    height: 380px;
+  }
+}
