@@ -10,15 +10,6 @@
   overflow: hidden;
 }
 
-.room {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  background: #080706;
-}
-
 .wall {
   position: absolute;
   inset: 0;
