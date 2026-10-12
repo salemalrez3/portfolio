@@ -3,10 +3,10 @@
    ========================================================= */
 .desk-scene {
   position: absolute;
-  left: 66%;
+  left: 58%;
   bottom: 5%;
-  width: 38.89%;
-  height: 31.11%;
+  width: 860px;
+  height: 380px;
   transform: translateX(-50%);
   z-index: 60;
   pointer-events: none;

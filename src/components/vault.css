@@ -3,11 +3,11 @@
    ========================================================= */
 .vault {
   position: absolute;
-  left: 57%;
-  bottom: 43%;
-  z-index: 60;
-  width: 11.81%;
-  height: 23.33%;
+  left: 56%;
+  bottom: 77%;
+  z-index: 3;
+  width: 270px;
+  height: 210px;
   padding: 0;
   border: 0;
   background: transparent;

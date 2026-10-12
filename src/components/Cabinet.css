@@ -3,7 +3,8 @@
    ========================================================= */
 .cabinet {
   position: relative;
-  width: 100%;
+  width: 460px;
+  height: 980px;
   font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
   user-select: none;
   margin-right: 46px;

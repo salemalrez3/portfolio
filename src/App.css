@@ -2,17 +2,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 149.25vw;         /* 100 / 0.67 */
+  height: 149.25vh;        /* 100 / 0.67 */
+  transform: scale(0.67);
+  transform-origin: top left;
   background-color: #171311;
   overflow: hidden;
-}
-
-.room {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: #080706;
 }
 
 .wall {
@@ -67,7 +62,6 @@
   bottom: 12%;
   left: 55%;
   z-index: 40;
-  width: 25%;
   transform: perspective(1000px) rotateY(0deg) scale(0.7);
   transform-origin: bottom left;
 }

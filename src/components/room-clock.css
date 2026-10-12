@@ -1,6 +1,6 @@
 .room-clock {
   position: absolute;
-  right: 12%;
+  right: 9%;
   bottom: 72%;
   z-index: 35;
 }
@@ -10,7 +10,7 @@
    ========================================================= */
 .clock-face {
   position: relative;
-  width: 6.67%;
+  width: 156px;
   aspect-ratio: 1;
   border: 8px solid #2a1c10;
   border-radius: 50%;
