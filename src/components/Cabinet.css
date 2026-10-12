@@ -114,7 +114,7 @@
    ========================================================= */
 .drawer-slot {
   position: relative;
-  height: 140px;
+  height: 210px;
   border-radius: 2px;
   z-index: 1;
 }
@@ -292,8 +292,8 @@
 
 /* When the slot is open, the drawer floats with a heavy shadow */
 .drawer-slot.is-open .drawer {
-  filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.9))
-    drop-shadow(0 10px 14px rgba(0, 0, 0, 0.7));
+  box-shadow: 0 26px 30px rgba(0, 0, 0, 0.9)
+    0 10px 14px rgba(0, 0, 0, 0.7);
 }
 
 .drawer-face {

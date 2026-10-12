@@ -2,13 +2,13 @@
   position: absolute;
     width: 5.5%;   
   height: 4.5%;  
-  left: 37%;
+  left: 56%;
   bottom: 4%;
   z-index: 31;
   padding: 0;
   border: 0;
   cursor: pointer;
-  transform: rotate(-4deg);
+  transform: rotate(12deg);
   appearance: none;
   background: radial-gradient(circle at 30% 20%, rgba(140, 100, 40, 0.15), transparent 40%), radial-gradient(circle at 70% 80%, rgba(100, 65, 20, 0.12), transparent 45%), linear-gradient(160deg, #ece1b8, #d8c890 55%, #b8a878);
   box-shadow: 5px 5px 20px 5px black;

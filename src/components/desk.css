@@ -3,14 +3,14 @@
    ========================================================= */
 .desk-scene {
   position: absolute;
-  left: 58%;
+  left: 43%;
   bottom: 5%;
   width: 860px;
   height: 380px;
   transform: translateX(-50%);
   z-index: 60;
   pointer-events: none;
-  filter: drop-shadow(18px 22px 18px rgba(0, 0, 0, 0.85));
+ filter: drop-shadow(18px 22px 18px rgba(0, 0, 0, 0.85));
 }
 
 /* =========================================================
