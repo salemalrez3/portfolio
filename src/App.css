@@ -67,7 +67,7 @@
 .cabinet-holder {
   position: absolute;
   bottom: 12%;
-  left: 55%;
+  left: 65%;
   z-index: 40;
   transform: perspective(1000px) rotateY(0deg) scale(0.7);
   transform-origin: bottom left;
