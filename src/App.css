@@ -1,13 +1,20 @@
 .app {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 149.25vw;         /* 100 / 0.67 */
-  height: 149.25vh;        /* 100 / 0.67 */
-  transform: scale(0.67);
-  transform-origin: top left;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: #171311;
   overflow: hidden;
+}
+
+.room {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2484px;
+  height: 1146px;
+  overflow: hidden;
+  transform-origin: center;
 }
 
 .wall {
