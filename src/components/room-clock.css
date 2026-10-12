@@ -10,7 +10,7 @@
    ========================================================= */
 .clock-face {
   position: relative;
-  width: 96px;
+  width: 6.67%;
   aspect-ratio: 1;
   border: 8px solid #2a1c10;
   border-radius: 50%;

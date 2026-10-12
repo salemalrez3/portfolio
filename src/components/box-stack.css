@@ -6,8 +6,8 @@
   left: 7%;
   bottom: 13%;
   z-index: 35;
-  width: 270px;
-  height: 300px;
+  width: 18.75%;
+  height: 33.33%;
   filter: drop-shadow(14px 22px 14px rgba(0, 0, 0, 0.8));
   transform: scale(0.96);
   pointer-events: none;
