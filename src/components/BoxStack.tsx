@@ -13,7 +13,7 @@ const BOXES = [
 
   // Third layer
   { id: "b7", cls: "box-g", label: "B.SC ICT",   sub: "2022 – 2027",    },
-  { id: "b8", cls: "box-h", label: "PERSONAL",   sub: "OFF RECORD",     },
+  { id: "b8", cls: "box-h", label: "Salem",   sub: "OFF RECORD",     },
 
   // Top
   { id: "b9", cls: "box-i", label: "REDACTED",   sub: "CLASSIFIED",  },

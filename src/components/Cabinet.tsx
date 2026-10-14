@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion, useDragControls, type PanInfo } from "framer-motion";
 import "./Cabinet.css";
 
-const OPEN_Y = 24;
-const OPEN_SCALE = 1.1;
+const OPEN_Y = 132;
+const OPEN_SCALE = 1.04;
 
 type FolderItem = { id: string; label: string; sub: string; rotate: number };
 type DrawerDef = { id: string; label: string; folders: FolderItem[] };
@@ -85,7 +85,7 @@ function DrawerSlot({
           {drawer.folders.map((f, i) => (
             <motion.div
               key={f.id}
-              className="folder"
+              className="cabinet-folder"
               initial={false}
               animate={
                 isOpen
