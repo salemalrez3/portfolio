@@ -57,9 +57,11 @@ export default function Vault() {
                 }}
               >
                 <span className="disc-platter">
+                  <span className="disc-track-ring" />
                   <span className="disc-label">
                     <CassetteSigil sigil={item.signature.sigil} size={12} />
                   </span>
+                  <span className="disc-hole" />
                 </span>
                 <span className="disc-name">{item.name}</span>
               </span>
@@ -129,7 +131,7 @@ export default function Vault() {
               <form className="vault-lock" onSubmit={unlock}>
                 <span className="vault-kicker">DIGITAL LOCK</span>
                 <h2>Safe locked</h2>
-                <p>Enter the four-digit code from the clue paper.</p>
+                <p style={{fontSize:'14px'}}>Enter the four-digit code from the clue paper to get the disks.</p>
                 <input
                   value={password}
                   onChange={(e) => {
