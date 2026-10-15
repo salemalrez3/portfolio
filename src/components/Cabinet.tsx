@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { motion, useDragControls, type PanInfo } from "framer-motion";
+import { AnimatePresence, motion, useDragControls, type PanInfo } from "framer-motion";
 import "./Cabinet.css";
+import CabinetFolderPage, { type CabinetFolder } from "./CabinetFolderPage";
 
-const OPEN_Y = 132;
+const OPEN_Y = 86;
 const OPEN_SCALE = 1.04;
 
 type FolderItem = { id: string; label: string; sub: string; rotate: number };
@@ -53,12 +54,14 @@ function DrawerSlot({
   onOpen,
   onClose,
   locked,
+  onOpenFolder,
 }: {
   drawer: DrawerDef;
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
   locked: boolean;
+  onOpenFolder: (folder: FolderItem) => void;
 }) {
   const controls = useDragControls();
 
@@ -86,6 +89,7 @@ function DrawerSlot({
             <motion.div
               key={f.id}
               className="cabinet-folder"
+              onClick={() => onOpenFolder(f)}
               initial={false}
               animate={
                 isOpen
@@ -155,6 +159,7 @@ function DrawerSlot({
 
 export default function Cabinet() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [selectedFolder, setSelectedFolder] = useState<CabinetFolder | null>(null);
 
   return (
     <div className="cabinet">
@@ -169,11 +174,20 @@ export default function Cabinet() {
               onOpen={() => setOpenId(d.id)}
               onClose={() => setOpenId(null)}
               locked={d.id !== "01"}
+              onOpenFolder={setSelectedFolder}
             />
           ))}
         </div>
       </div>
       <div className="cabinet-bottom" />
+      <AnimatePresence>
+        {selectedFolder && (
+          <CabinetFolderPage
+            folder={selectedFolder}
+            onClose={() => setSelectedFolder(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
