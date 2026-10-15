@@ -878,7 +878,14 @@ export default function EducationDashboard({
           <button
             type="button"
             className="lms-footer-link"
-            onClick={() => window.open(`mailto:${PROFILE.email}`, "_self")}
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(PROFILE.email);
+                showToast("Email address copied");
+              } catch {
+                showToast(PROFILE.email);
+              }
+            }}
           >
             <Icon name="mail" size={14} />
             Email

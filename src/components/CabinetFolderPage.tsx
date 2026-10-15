@@ -22,7 +22,7 @@ export default function EducationFolderPage({
       className="edu-layer"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      exit={{ opacity: 1 }}
       transition={{ duration: 0.25 }}
       onClick={onClose}
       role="presentation"
@@ -65,7 +65,7 @@ export default function EducationFolderPage({
         >
           <div className="edu-paper-glow" aria-hidden />
           <div className="edu-paper-inner">
-            <EducationDashboard />
+            <EducationDashboard onClose={onClose} />
           </div>
         </motion.div>
       </motion.div>
