@@ -116,9 +116,9 @@
 .map-paper {
   position: relative;
   /* width = smallest of: 90vw, 1180px, or whatever fits 76vh at 10:7 ratio */
-  width: min(90vw, 1180px, calc(76vh * 10 / 7));
-  aspect-ratio: 10 / 7;
-  max-height: 76vh;
+  width: min(96vw, 1500px, calc(82vh * 12 / 7));
+  aspect-ratio: 12 / 7;
+  max-height: 82vh;
   box-shadow:
     0 30px 70px rgba(0, 0, 0, 0.75),
     0 8px 20px rgba(0, 0, 0, 0.55),
