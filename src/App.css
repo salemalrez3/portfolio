@@ -93,6 +93,50 @@
   pointer-events: none;
 }
 
+.room-entry-light {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(255, 194, 107, 0.2), transparent 32%),
+    rgba(0, 0, 0, 0.98);
+  animation: room-light-on 4.4s linear forwards;
+}
+
+@keyframes room-light-on {
+  0%,
+  10% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.28;
+  }
+  12% {
+    opacity: 0.86;
+  }
+  16% {
+    opacity: 0.16;
+  }
+  27% {
+    opacity: 0.46;
+  }
+  32% {
+    opacity: 0.12;
+  }
+  38%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-entry-light {
+    animation: none;
+    opacity: 0;
+  }
+}
+
 .job-map-page {
   min-height: 100%;
   overflow: auto;

@@ -51,7 +51,13 @@ export default function Television() {
         <span className="stand-leg stand-leg-right" />
       </div>
     </div>
-    {cassette && <CassetteDialog cassette={cassette} onClose={() => setCassette(null)} />}
+        {cassette && (
+  <CassetteDialog
+    cassette={cassette}
+    onClose={() => setCassette(null)}
+    onSelect={(c) => setCassette(c)}
+  />
+)}
     </>
   );
 }

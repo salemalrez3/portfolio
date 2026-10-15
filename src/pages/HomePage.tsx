@@ -42,6 +42,7 @@ export default function HomePage({ onOpenMap }: { onOpenMap: () => void }) {
       <div className="junction-shadow" />
       <div className="baseboard" />
       <div className="lamp" />
+      <div className="room-entry-light" aria-hidden="true" />
     </div>
   );
 }

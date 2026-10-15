@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./vault.css";
 import { CASSETTES } from "./cassettes";
+import { CassetteSigil } from "./CassetteSigil";
 
 export default function Vault() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -40,33 +41,27 @@ export default function Vault() {
           <span className="vault-shelf">
             {CASSETTES.map((item, index) => (
               <span
-                className="vault-cassette"
+                className="vault-disc"
                 key={item.name}
-                data-cat={item.category}
+                style={
+                  { "--accent": item.signature.accent } as React.CSSProperties
+                }
                 draggable={isUnlocked}
                 onDragStart={(event) => {
                   event.dataTransfer.setData("text/cassette-name", item.name);
-                  event.dataTransfer.setData("text/cassette-index", String(index));
+                  event.dataTransfer.setData(
+                    "text/cassette-index",
+                    String(index),
+                  );
                   event.dataTransfer.effectAllowed = "copy";
                 }}
               >
-                <span className="cassette-shell">
-                  <span className="cassette-screw cassette-screw-tl" />
-                  <span className="cassette-screw cassette-screw-tr" />
-
-                  <span className="cassette-paper">
-                    <span className="cassette-name">{item.name}</span>
-                  </span>
-
-                  <span className="cassette-reels">
-                    <span className="reel">
-                      <span className="reel-hub" />
-                    </span>
-                    <span className="reel">
-                      <span className="reel-hub" />
-                    </span>
+                <span className="disc-platter">
+                  <span className="disc-label">
+                    <CassetteSigil sigil={item.signature.sigil} size={12} />
                   </span>
                 </span>
+                <span className="disc-name">{item.name}</span>
               </span>
             ))}
           </span>
@@ -75,8 +70,8 @@ export default function Vault() {
         {/* Door (rotates down on unlock) */}
         <motion.span
           className="vault-door"
-          animate={{ opacity:isUnlocked?0:1}}
-          style={{display:isUnlocked?"none":""}}
+          animate={{ opacity: isUnlocked ? 0 : 1 }}
+          style={{ display: isUnlocked ? "none" : "" }}
           transition={{ type: "spring", stiffness: 70, damping: 16 }}
         >
           <span className="vault-rivet vault-rivet-tl" />
