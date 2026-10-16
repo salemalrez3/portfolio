@@ -206,7 +206,7 @@
   inset: 0;
   z-index: 0;
   background-color: #171311;
-  background-image: url("/image.png");
+  background-image: url("/image.webp");
   background-position: center;
   background-repeat: repeat;
   background-size: 500px 500px;
@@ -240,7 +240,7 @@
   z-index: 20;
   height: 41%;
   background-color: #050505;
-  background-image: url("/Texturelabs_Wood_227M.jpg");
+  background-image: url("/Texturelabs_Wood_227M.webp");
   background-position: center;
   background-repeat: repeat;
   background-size: 650px 600px;
