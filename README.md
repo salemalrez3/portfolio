@@ -20,6 +20,9 @@ The site will be available at:
 The repository name is part of the Vite base path, so keep the deployment URL
 when testing links and assets locally or on GitHub Pages.
 
+Room textures are served as optimized WebP assets from `public/` to keep the
+initial scene load small.
+
 ---
 
 The project was initially generated from the Vite React TypeScript template.
