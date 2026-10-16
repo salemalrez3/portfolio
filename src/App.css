@@ -15,24 +15,37 @@
   display: none;
 }
 
-.opening-briefing {
+.opening-screen {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 110;
+  inset: 0;
+  z-index: 1500;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(111, 61, 26, 0.22), transparent 42%),
+    #0c0806;
+}
+
+.opening-briefing {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  max-width: 340px;
-  padding: 18px 22px;
+  gap: 12px;
+  width: min(560px, calc(100vw - 48px));
+  max-width: none;
+  padding: 34px 38px;
   border-left: 2px solid #bd8651;
-  background: linear-gradient(90deg, rgba(10, 6, 4, 0.88), rgba(10, 6, 4, 0.2));
+  border-top: 1px solid rgba(224, 178, 110, 0.28);
+  border-right: 1px solid rgba(224, 178, 110, 0.12);
+  border-bottom: 1px solid rgba(224, 178, 110, 0.12);
+  background: linear-gradient(145deg, rgba(30, 17, 9, 0.96), rgba(10, 6, 4, 0.92));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.72);
   color: #e8dcc0;
   font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
   text-align: center;
   pointer-events: auto;
-  transform: translate(-50%, -50%);
-  animation: briefing-reveal 1.2s ease both;
+  animation: briefing-reveal 0.8s ease both;
 }
 
 .opening-briefing-kicker {
@@ -48,40 +61,88 @@
   font-weight: 400;
 }
 
-.opening-briefing > span:last-child {
+.opening-briefing-intro {
+  margin: 0;
   color: rgba(232, 220, 192, 0.72);
   font-size: 12px;
-  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+
+.opening-briefing-clues {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 8px 0 6px;
+  text-align: left;
+}
+
+.opening-briefing-clues span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 76px;
+  padding: 12px 10px;
+  border: 1px solid rgba(224, 178, 110, 0.25);
+  background: rgba(255, 220, 157, 0.04);
+}
+
+.opening-briefing-clues b {
+  color: #f0c77f;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.opening-briefing-clues small {
+  color: rgba(232, 220, 192, 0.62);
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 .opening-briefing-close {
   align-self: center;
-  margin-top: 12px;
-  padding: 9px 14px;
-  border: 1px solid rgba(224, 178, 110, 0.55);
-  background: rgba(30, 17, 9, 0.72);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 8px;
+  padding: 12px 24px;
+  border: 1px solid #d2a36b;
+  background: linear-gradient(180deg, #8a552b, #5d3219);
   color: #f0d19a;
   cursor: pointer;
   font: inherit;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 0 #2b170b, 0 8px 18px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
 }
 
 .opening-briefing-close:hover {
   border-color: #f0d19a;
-  background: rgba(120, 67, 28, 0.5);
+  background: linear-gradient(180deg, #a36b39, #704020);
+}
+
+.opening-briefing-close:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #2b170b, 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.opening-briefing-close small {
+  color: rgba(255, 235, 198, 0.7);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
 }
 
 @keyframes briefing-reveal {
   0% {
     opacity: 0;
-    transform: translate(-50%, calc(-50% + 12px));
+    transform: translateY(12px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -119,10 +180,18 @@
   }
 
   .opening-briefing {
-    right: auto;
-    left: 50%;
-    width: min(calc(100vw - 32px), 340px);
-    max-width: none;
+    width: min(calc(100vw - 32px), 560px);
+    padding: 26px 20px;
+  }
+
+  .opening-briefing-clues {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .opening-briefing-clues span {
+    min-height: 0;
+    align-items: center;
   }
 }
 
@@ -295,9 +364,7 @@
     opacity: 0;
   }
 
-  .opening-briefing {
-    animation: none;
-  }
+  .opening-briefing { animation: none; }
 }
 
 .job-map-page {

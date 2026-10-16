@@ -9,7 +9,6 @@ import RoomClock from "../components/RoomClock";
 import Desk from "../components/Desk";
 
 export default function HomePage({ onOpenMap }: { onOpenMap: () => void }) {
-  const [briefingVisible, setBriefingVisible] = useState(true);
   const [scale, setScale] = useState(() =>
     Math.min(window.innerWidth / 2484, window.innerHeight / 1146),
   );
@@ -46,20 +45,6 @@ export default function HomePage({ onOpenMap }: { onOpenMap: () => void }) {
         <div className="lamp" />
         <div className="room-entry-light" aria-hidden="true" />
       </div>
-      {briefingVisible && (
-        <div className="opening-briefing" role="dialog" aria-label="Opening case briefing">
-          <span className="opening-briefing-kicker">CASE FILE 20:05</span>
-          <strong>You are the detective.</strong>
-          <span>Search the room for my CV.</span>
-          <button
-            type="button"
-            className="opening-briefing-close"
-            onClick={() => setBriefingVisible(false)}
-          >
-            Begin investigation
-          </button>
-        </div>
-      )}
     </>
   );
 }
