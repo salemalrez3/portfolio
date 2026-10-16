@@ -1,4 +1,28 @@
-# React + TypeScript + Vite
+# Salem's Interactive Portfolio
+
+This is a noir-themed interactive portfolio built with React, TypeScript, and Vite.
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+## GitHub Pages deployment
+
+The `main` branch deploys automatically through GitHub Actions. After enabling
+GitHub Pages in the repository settings, choose **GitHub Actions** as the source.
+The site will be available at:
+
+`https://salemalrez3.github.io/portfolio/`
+
+The repository name is part of the Vite base path, so keep the deployment URL
+when testing links and assets locally or on GitHub Pages.
+
+---
+
+The project was initially generated from the Vite React TypeScript template.
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
