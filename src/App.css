@@ -11,6 +11,80 @@
   display: none;
 }
 
+.portrait-gate {
+  display: none;
+}
+
+.opening-briefing {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-width: 340px;
+  padding: 18px 22px;
+  border-left: 2px solid #bd8651;
+  background: linear-gradient(90deg, rgba(10, 6, 4, 0.88), rgba(10, 6, 4, 0.2));
+  color: #e8dcc0;
+  font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  text-align: center;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  animation: briefing-reveal 1.2s ease both;
+}
+
+.opening-briefing-kicker {
+  color: #bd8651;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+}
+
+.opening-briefing strong {
+  color: #f0d19a;
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 400;
+}
+
+.opening-briefing > span:last-child {
+  color: rgba(232, 220, 192, 0.72);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.opening-briefing-close {
+  align-self: center;
+  margin-top: 12px;
+  padding: 9px 14px;
+  border: 1px solid rgba(224, 178, 110, 0.55);
+  background: rgba(30, 17, 9, 0.72);
+  color: #f0d19a;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.opening-briefing-close:hover {
+  border-color: #f0d19a;
+  background: rgba(120, 67, 28, 0.5);
+}
+
+@keyframes briefing-reveal {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 12px));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
 @media (max-width: 720px) {
   .device-notice {
     position: fixed;
@@ -42,6 +116,53 @@
 
   .device-notice span {
     color: rgba(232, 220, 192, 0.72);
+  }
+
+  .opening-briefing {
+    right: auto;
+    left: 50%;
+    width: min(calc(100vw - 32px), 340px);
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 720px) and (orientation: portrait) {
+  .portrait-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(130, 76, 35, 0.18), transparent 42%),
+      #0c0806;
+    color: #e8dcc0;
+    font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
+    text-align: center;
+  }
+
+  .portrait-gate-icon {
+    color: #d2a36b;
+    font-size: 42px;
+    line-height: 1;
+  }
+
+  .portrait-gate strong {
+    color: #f0d19a;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: 400;
+  }
+
+  .portrait-gate > span:last-child {
+    max-width: 300px;
+    color: rgba(232, 220, 192, 0.7);
+    font-size: 11px;
+    line-height: 1.7;
   }
 }
 
@@ -172,6 +293,10 @@
   .room-entry-light {
     animation: none;
     opacity: 0;
+  }
+
+  .opening-briefing {
+    animation: none;
   }
 }
 
