@@ -48,11 +48,6 @@ export default function App() {
         <strong>Best experienced on PC</strong>
         <span>Open this case file on a larger screen for the full room experience.</span>
       </div>
-      <div className="portrait-gate" role="status">
-        <span className="portrait-gate-icon" aria-hidden="true">↻</span>
-        <strong>Rotate to landscape</strong>
-        <span>This case is designed as a panoramic room. Turn your phone sideways to enter.</span>
-      </div>
     </div>
   );
 }
