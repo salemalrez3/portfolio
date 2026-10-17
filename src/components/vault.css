@@ -513,12 +513,6 @@
    MOBILE
    ========================================================= */
 @media (max-width: 720px) {
-  .vault {
-    left: 31%;
-    bottom: 39%;
-    width: 40vw;
-    height: 31vw;
-  }
   .vault-shelf {
     gap: 6px 5px;
     padding: 10px 8px 9px;
