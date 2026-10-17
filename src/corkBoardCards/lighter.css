@@ -147,22 +147,29 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  width: calc(100% - 48px);
   transform: translateX(-50%);
   color: rgba(255, 200, 140, 0.5);
   pointer-events: none;
   font-size: 16px;
   letter-spacing: 0.3em;
+  line-height: 1.5;
   text-transform: uppercase;
-  white-space: nowrap;
+  text-align: center;
 }
 
 .hint-dot {
+  flex: 0 0 5px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #ff9d4d;
   box-shadow: 0 0 8px #ff9d4d;
   animation: hintPulse 1.6s infinite;
+}
+
+.hint-text {
+  max-width: 100%;
 }
 
 @keyframes hintPulse {

@@ -140,7 +140,10 @@ export default function PaperDialog({
       </motion.div>
       <Lighter onDrag={handleLighterDrag} onDragEnd={() => setIsOver(false)} />
       <div className="lighter-hint">
-        <span className="hint-dot" /> hold the flame over one of the papers on the board to get the secret
+        <span className="hint-dot" />
+        <span className="hint-text">
+          hold the flame over one of the papers on the board to get the secret
+        </span>
       </div>
     </DialogShell>
   );

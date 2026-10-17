@@ -13,7 +13,7 @@
   right: 0;
   bottom: 0;
   z-index: 300;
-  width: min(58vw, 600px);
+  width: min(100vw, 1000px);
   overflow: hidden;
   background:
     radial-gradient(ellipse at 30% 20%, rgba(60, 30, 10, 0.55) 0%, transparent 55%),
