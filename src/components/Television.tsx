@@ -2,7 +2,7 @@ import { useState } from "react";
 import CassetteDialog from "./CassetteDialog";
 import { CASSETTES, type Cassette } from "./cassettes";
 import "./television.css";
-import { playSound, setRainDucked } from "../audioManager";
+import { playDiscoveryAha, playSound, setRainDucked } from "../audioManager";
 import { useEffect } from "react";
 
 export default function Television() {
@@ -19,6 +19,7 @@ export default function Television() {
     const index = Number(event.dataTransfer.getData("text/cassette-index"));
     if (Number.isInteger(index) && CASSETTES[index]) {
       playSound("static");
+      playDiscoveryAha("occupations");
       setCassette(CASSETTES[index]);
     }
   };

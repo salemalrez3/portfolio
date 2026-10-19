@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import JobMapPage from "./pages/JobMapPage";
+import { startBackgroundScore } from "./audioManager";
 
 export default function App() {
   const [page, setPage] = useState<"home" | "job-map">("home");
@@ -36,7 +37,10 @@ export default function App() {
             <button
               type="button"
               className="opening-briefing-close"
-              onClick={() => setBriefingOpen(false)}
+              onClick={() => {
+                startBackgroundScore();
+                setBriefingOpen(false);
+              }}
             >
               <span>Enter the room</span>
               <small>Begin investigation</small>

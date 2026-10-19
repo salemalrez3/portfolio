@@ -6,7 +6,7 @@ import type { Project } from "./mapTypes";
 import { MapLandmarks } from "./MapLandmarks";
 import { ProjectFolder } from "./ProjectFolder";
 import { pinOf } from "./mapTypes";
-import { playSound, setRainDucked } from "../audioManager";
+import { playDiscoveryAha, playSound, setRainDucked } from "../audioManager";
 export default function JobMapPage({ onBack }: { onBack: () => void }) {
   const [active, setActive] = useState<Project | null>(null);
   const [stamp, setStamp] = useState(false);
@@ -34,6 +34,7 @@ export default function JobMapPage({ onBack }: { onBack: () => void }) {
 
   const open = (p: Project) => {
     playSound("dialog");
+    playDiscoveryAha("projects");
     if (ndaTimer.current !== null) {
       window.clearTimeout(ndaTimer.current);
       ndaTimer.current = null;

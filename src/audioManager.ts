@@ -6,6 +6,8 @@ let rainSource: AudioBufferSourceNode | null = null;
 let rainOn = false;
 let rainBaseGain = 0.01;
 let duckDepth = 0;
+let backgroundStarted = false;
+const discoveries = new Set<string>();
 
 function getContext() {
   context ??= new AudioContext();
@@ -36,6 +38,48 @@ function playTone(frequency: number, duration: number, volume: number, type: Osc
   oscillator.connect(gain).connect(audio.destination);
   oscillator.start(now);
   oscillator.stop(now + duration + 0.02);
+}
+
+export function startBackgroundScore() {
+    if (backgroundStarted) return;
+    const audio = getContext();
+    const gain = audio.createGain();
+    gain.gain.value = 0.0001;
+    gain.gain.exponentialRampToValueAtTime(0.038, audio.currentTime + 2.5);
+    gain.connect(audio.destination);
+
+    const drone = audio.createOscillator();
+    const undertone = audio.createOscillator();
+    drone.type = "triangle";
+    undertone.type = "sine";
+    drone.frequency.value = 73.42;
+    undertone.frequency.value = 36.71;
+    drone.connect(gain);
+    undertone.connect(gain);
+    drone.start();
+    undertone.start();
+    backgroundStarted = true;
+}
+
+export function playDiscoveryAha(id: string) {
+    if (discoveries.has(id)) return;
+    discoveries.add(id);
+    const audio = getContext();
+    const gain = audio.createGain();
+    const now = audio.currentTime;
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.07, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+    gain.connect(audio.destination);
+
+    [392, 523.25, 659.25].forEach((frequency, index) => {
+      const oscillator = audio.createOscillator();
+      oscillator.type = "sine";
+      oscillator.frequency.value = frequency;
+      oscillator.connect(gain);
+      oscillator.start(now + index * 0.16);
+      oscillator.stop(now + 3.8);
+    });
 }
 
 export function playSound(name: SoundName) {

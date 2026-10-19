@@ -13,7 +13,7 @@ export default function Clue() {
   }, [isOpen]);
 
   const open = () => {
-    playSound("dialog");
+    playSound("paper");
     setIsOpen(true);
   };
 

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./rain-window.css";
-import { isRainActive, toggleRain } from "../audioManager";
+import { isRainActive, playSound, toggleRain } from "../audioManager";
 
 type Building = { x: number; w: number; h: number };
 
@@ -33,8 +33,33 @@ const RAIN_DROPS = Array.from({ length: 42 }, (_, index) => ({
 }));
 
 export default function RainWindow() {
-  const [isRainOn, setIsRainOn] = useState(true);
-  useEffect(() => setIsRainOn(isRainActive()), []);
+  const [isRainOn, setIsRainOn] = useState(() => isRainActive());
+  const [blindOpen, setBlindOpen] = useState(() => isRainActive());
+  const [pullStart, setPullStart] = useState<number | null>(null);
+
+  const toggleBlind = () => {
+    playSound("click");
+    const next = !blindOpen;
+    setBlindOpen(next);
+    setIsRainOn(toggleRain());
+  };
+
+  const beginPull = (event: React.PointerEvent<HTMLButtonElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setPullStart(event.clientY);
+  };
+
+  const pull = (event: React.PointerEvent<HTMLButtonElement>) => {
+    if (pullStart === null) return;
+    const distance = event.clientY - pullStart;
+    if (distance < -36 && !blindOpen) {
+      setPullStart(null);
+      toggleBlind();
+    } else if (distance > 36 && blindOpen) {
+      setPullStart(null);
+      toggleBlind();
+    }
+  };
 
   return (
     <section className={`rain-window ${isRainOn ? "is-live" : ""}`} aria-label="Rainy city window">
@@ -83,6 +108,9 @@ export default function RainWindow() {
           {/* --- atmosphere between glass and room --- */}
           <div className="rain-fog" aria-hidden />
           <div className="rain-sheen" aria-hidden />
+          <div className={`window-blinds ${blindOpen ? "is-raised" : ""}`} aria-hidden="true">
+            {Array.from({ length: 13 }, (_, index) => <span key={index} />)}
+          </div>
         </div>
 
         <div className="rain-window-crossbar rain-window-crossbar-horizontal" />
@@ -92,12 +120,18 @@ export default function RainWindow() {
 
       <button
         type="button"
-        className={`rain-toggle ${isRainOn ? "is-on" : ""}`}
-        onClick={() => setIsRainOn(toggleRain())}
+        className={`rain-blind ${blindOpen ? "is-open" : ""}`}
+        onClick={toggleBlind}
+        onPointerDown={beginPull}
+        onPointerMove={pull}
+        onPointerUp={() => setPullStart(null)}
+        onPointerCancel={() => setPullStart(null)}
         aria-pressed={isRainOn}
+        aria-label={blindOpen ? "Pull cord down to close blinds" : "Pull cord up to raise blinds"}
       >
-        <span className="rain-toggle-dot" />
-        Rain {isRainOn ? "on" : "off"}
+        <span className="rain-blind-rope" />
+        <span className="rain-blind-weight" />
+        <span className="rain-blind-label">{blindOpen ? "PULL DOWN · CLOSE" : "PULL UP · OPEN"}</span>
       </button>
     </section>
   );

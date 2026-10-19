@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion, useDragControls, type PanInfo } from "framer-motion";
 import "./Cabinet.css";
 import CabinetFolderPage, { type CabinetFolder } from "./CabinetFolderPage";
-import { playSound } from "../audioManager";
+import { playDiscoveryAha, playSound } from "../audioManager";
 
 const OPEN_Y = 86;
 const OPEN_SCALE = 1.04;
@@ -92,6 +92,7 @@ function DrawerSlot({
               className="cabinet-folder"
               onClick={() => {
                 playSound("paper");
+                playDiscoveryAha("education");
                 onOpenFolder(f);
               }}
               initial={false}
