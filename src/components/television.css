@@ -363,7 +363,7 @@
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 24px),
     #18323d;
 }
-.playback-image-iedc .playback-screen {
+.playback-image-iecd .playback-screen {
   background:
     radial-gradient(circle at 50% 42%, rgba(218, 178, 93, 0.6), transparent 18%),
     linear-gradient(135deg, #17291f, #9f7947 50%, #19231e);

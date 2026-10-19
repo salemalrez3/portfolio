@@ -86,10 +86,10 @@ export const CASSETTES: Cassette[] = [
     tech: ["React", "React Query", "REST", "Git"],
   },
   {
-    name: "IEDC",
-    shortName: "IEDC",
+    name: "IECD",
+    shortName: "IECD",
     category: "work",
-    imageClass: "iedc",
+    imageClass: "IECD",
     caption: "IT operations · support archive",
     signature: { accent: "#58B88A", dim: "rgba(88, 184, 138, 0.16)", sigil: "circle" },
     role: "IT Support",
