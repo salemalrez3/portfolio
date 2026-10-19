@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./vault.css";
 import { CASSETTES } from "./cassettes";
 import { CassetteSigil } from "./CassetteSigil";
+import { playSound, setRainDucked } from "../audioManager";
 
 export default function Vault() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!isDialogOpen) return;
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, [isDialogOpen]);
 
   const close = () => {
     setIsDialogOpen(false);
@@ -31,7 +38,10 @@ export default function Vault() {
     <>
       <button
         className={`vault ${isUnlocked ? "is-open" : ""}`}
-        onClick={isUnlocked ? undefined : () => setIsDialogOpen(true)}
+        onClick={isUnlocked ? undefined : () => {
+          playSound("dialog");
+          setIsDialogOpen(true);
+        }}
         aria-label={isUnlocked ? "Opened archive safe" : "Unlock archive safe"}
       >
         {/* Interior cavity (revealed when door opens) */}

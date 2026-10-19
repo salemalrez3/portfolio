@@ -6,10 +6,16 @@ import type { Project } from "./mapTypes";
 import { MapLandmarks } from "./MapLandmarks";
 import { ProjectFolder } from "./ProjectFolder";
 import { pinOf } from "./mapTypes";
+import { playSound, setRainDucked } from "../audioManager";
 export default function JobMapPage({ onBack }: { onBack: () => void }) {
   const [active, setActive] = useState<Project | null>(null);
   const [stamp, setStamp] = useState(false);
   const ndaTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, []);
 
   useEffect(() => {
     const esc = (e: KeyboardEvent) => {
@@ -27,6 +33,7 @@ export default function JobMapPage({ onBack }: { onBack: () => void }) {
   }, []);
 
   const open = (p: Project) => {
+    playSound("dialog");
     if (ndaTimer.current !== null) {
       window.clearTimeout(ndaTimer.current);
       ndaTimer.current = null;

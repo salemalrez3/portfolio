@@ -1,5 +1,6 @@
 import type { KeyboardEvent } from "react";
 import type { Project } from "./mapTypes";
+import { playSound } from "../audioManager";
 import { pinOf } from "./mapTypes";
 
 type MapNodeProps = {
@@ -18,7 +19,10 @@ export function MapNode({ project, active, onClick }: MapNodeProps) {
     <g
       className={"node " + (project.redacted ? "node-redacted " : "") + (active ? "is-active" : "")}
       transform={`translate(${position.x - 75} ${position.y + 6}) rotate(${project.rotation} 75 0)`}
-      onClick={onClick}
+      onClick={() => {
+        playSound("paper");
+        onClick();
+      }}
       role="button"
       tabIndex={0}
       onKeyDown={handleKeyDown}

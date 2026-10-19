@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import type { Paper } from "../data";
 import { HOLD_DURATION_MS, SECRET_PAPER_ID } from "../data";
 import Lighter from "./Lighter";
+import { setRainDucked } from "../../audioManager";
 
 function DialogShell({
   children,
@@ -58,6 +59,11 @@ export default function PaperDialog({
   const rafRef = useRef<number | null>(null);
   const firedRef = useRef(false);
   const isSecret = paper.id === SECRET_PAPER_ID;
+
+  useEffect(() => {
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, []);
 
   useEffect(() => {
     const cancel = () => {

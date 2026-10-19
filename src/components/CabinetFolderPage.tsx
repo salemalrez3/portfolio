@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import EducationDashboard from "./EducationalDashboard";
 import "./CabinetFolderPage.css";
+import { setRainDucked } from "../audioManager";
 
 export type CabinetFolder = {
   id: string;
@@ -17,6 +19,11 @@ export default function EducationFolderPage({
   folder: CabinetFolder;
   onClose: () => void;
 }) {
+  useEffect(() => {
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, []);
+
   return createPortal(
     <motion.div
       className="edu-layer"

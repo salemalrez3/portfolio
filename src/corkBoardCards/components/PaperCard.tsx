@@ -1,4 +1,5 @@
 import type { Paper } from "../data";
+import { playSound } from "../../audioManager";
 
 export default function PaperCard({
   paper,
@@ -19,7 +20,10 @@ export default function PaperCard({
         height: `${paper.h}%`,
         transform: `rotate(${paper.rot}deg)`,
       }}
-      onClick={() => onSelect(paper)}
+      onClick={() => {
+        playSound("paper");
+        onSelect(paper);
+      }}
       aria-label={paper.label || "Open blank paper"}
     >
       <span className="paper-surface" />

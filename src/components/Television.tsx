@@ -2,14 +2,25 @@ import { useState } from "react";
 import CassetteDialog from "./CassetteDialog";
 import { CASSETTES, type Cassette } from "./cassettes";
 import "./television.css";
+import { playSound, setRainDucked } from "../audioManager";
+import { useEffect } from "react";
 
 export default function Television() {
   const [cassette, setCassette] = useState<Cassette | null>(null);
 
+  useEffect(() => {
+    if (!cassette) return;
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, [cassette]);
+
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const index = Number(event.dataTransfer.getData("text/cassette-index"));
-    if (Number.isInteger(index) && CASSETTES[index]) setCassette(CASSETTES[index]);
+    if (Number.isInteger(index) && CASSETTES[index]) {
+      playSound("static");
+      setCassette(CASSETTES[index]);
+    }
   };
 
   return (

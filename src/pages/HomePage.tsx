@@ -7,6 +7,7 @@ import Television from "../components/Television";
 import BoxStack from "../components/BoxStack";
 import RoomClock from "../components/RoomClock";
 import Desk from "../components/Desk";
+import RainWindow from "../components/RainWindow";
 
 export default function HomePage({ onOpenMap }: { onOpenMap: () => void }) {
   const [scale, setScale] = useState(() =>
@@ -38,6 +39,7 @@ export default function HomePage({ onOpenMap }: { onOpenMap: () => void }) {
         <Clue />
         <div className="cabinet-holder"><Cabinet /></div>
         <Television />
+        <RainWindow />
         <Desk />
         <RoomClock />
         <div className="junction-shadow" />

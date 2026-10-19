@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./clue.css";
+import { playSound, setRainDucked } from "../audioManager";
 
 export default function Clue() {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    setRainDucked(true);
+    return () => setRainDucked(false);
+  }, [isOpen]);
+
+  const open = () => {
+    playSound("dialog");
+    setIsOpen(true);
+  };
+
   return (
     <>
-      <button className="age-clue" onClick={() => setIsOpen(true)} aria-label="Open time clue" />
+      <button className="age-clue" onClick={open} aria-label="Open time clue" />
       <AnimatePresence>
         {isOpen && (
           <div className="clue-dialog-layer">

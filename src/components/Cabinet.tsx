@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion, useDragControls, type PanInfo } from "framer-motion";
 import "./Cabinet.css";
 import CabinetFolderPage, { type CabinetFolder } from "./CabinetFolderPage";
+import { playSound } from "../audioManager";
 
 const OPEN_Y = 86;
 const OPEN_SCALE = 1.04;
@@ -89,7 +90,10 @@ function DrawerSlot({
             <motion.div
               key={f.id}
               className="cabinet-folder"
-              onClick={() => onOpenFolder(f)}
+              onClick={() => {
+                playSound("paper");
+                onOpenFolder(f);
+              }}
               initial={false}
               animate={
                 isOpen
@@ -171,8 +175,14 @@ export default function Cabinet() {
               key={d.id}
               drawer={d}
               isOpen={openId === d.id}
-              onOpen={() => setOpenId(d.id)}
-              onClose={() => setOpenId(null)}
+              onOpen={() => {
+                playSound("drawer");
+                setOpenId(d.id);
+              }}
+              onClose={() => {
+                playSound("drawer");
+                setOpenId(null);
+              }}
               locked={d.id !== "01"}
               onOpenFolder={setSelectedFolder}
             />
