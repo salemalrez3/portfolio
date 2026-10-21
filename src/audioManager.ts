@@ -4,11 +4,47 @@ let context: AudioContext | null = null;
 let rainGain: GainNode | null = null;
 let rainSource: AudioBufferSourceNode | null = null;
 let rainOn = false;
-let rainBaseGain = 0.01;
+let rainBaseGain = 0.015;
 let duckDepth = 0;
-let backgroundStarted = false;
 const discoveries = new Set<string>();
 
+/* ---------- real audio ---------- */
+const BG_SRC = "/portfolio/bg.mp3";
+const AHA_SRC = "/portfolio/aha.mp3";
+const BG_VOLUME = 0.22;
+
+let bgAudio: HTMLAudioElement | null = null;
+const fadeTimers = new WeakMap<HTMLAudioElement, number>();
+
+/**
+ * Fade an <audio> element from its current volume to `target` over `durationMs`.
+ * Uses a per-element timer so simultaneous fades (bg duck + aha fade) don't
+ * stomp on each other.
+ */
+function fadeTo(
+  el: HTMLAudioElement,
+  target: number,
+  durationMs: number,
+  onDone?: () => void,
+) {
+  const existing = fadeTimers.get(el);
+  if (existing !== undefined) clearInterval(existing);
+
+  const start = el.volume;
+  const startTime = performance.now();
+
+  const id = window.setInterval(() => {
+    const t = Math.min((performance.now() - startTime) / durationMs, 1);
+    el.volume = Math.max(0, Math.min(1, start + (target - start) * t));
+    if (t >= 1) {
+      clearInterval(id);
+      fadeTimers.delete(el);
+      onDone?.();
+    }
+  }, 30);
+
+  fadeTimers.set(el, id);
+}
 function getContext() {
   context ??= new AudioContext();
   if (context.state === "suspended") void context.resume();
@@ -41,45 +77,51 @@ function playTone(frequency: number, duration: number, volume: number, type: Osc
 }
 
 export function startBackgroundScore() {
-    if (backgroundStarted) return;
-    const audio = getContext();
-    const gain = audio.createGain();
-    gain.gain.value = 0.0001;
-    gain.gain.exponentialRampToValueAtTime(0.038, audio.currentTime + 2.5);
-    gain.connect(audio.destination);
+  if (bgAudio) return;
 
-    const drone = audio.createOscillator();
-    const undertone = audio.createOscillator();
-    drone.type = "triangle";
-    undertone.type = "sine";
-    drone.frequency.value = 73.42;
-    undertone.frequency.value = 36.71;
-    drone.connect(gain);
-    undertone.connect(gain);
-    drone.start();
-    undertone.start();
-    backgroundStarted = true;
+  bgAudio = new Audio(BG_SRC);
+  bgAudio.loop = true;
+  bgAudio.volume = 0;
+
+  // Fade in over 2.5s once the file is ready to play.
+  bgAudio.addEventListener("canplay", () => fadeTo(bgAudio!, BG_VOLUME, 2500), {
+    once: true,
+  });
+
+  bgAudio.play().catch(() => {
+    // If the browser blocks autoplay (rare, but happens after a long idle),
+    // retry on the next user gesture.
+    const retry = () => {
+      bgAudio?.play().catch(() => {});
+      window.removeEventListener("pointerdown", retry);
+    };
+    window.addEventListener("pointerdown", retry, { once: true });
+  });
 }
-
 export function playDiscoveryAha(id: string) {
-    if (discoveries.has(id)) return;
-    discoveries.add(id);
-    const audio = getContext();
-    const gain = audio.createGain();
-    const now = audio.currentTime;
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.07, now + 0.04);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
-    gain.connect(audio.destination);
+  if (discoveries.has(id)) return;
+  discoveries.add(id);
 
-    [392, 523.25, 659.25].forEach((frequency, index) => {
-      const oscillator = audio.createOscillator();
-      oscillator.type = "sine";
-      oscillator.frequency.value = frequency;
-      oscillator.connect(gain);
-      oscillator.start(now + index * 0.16);
-      oscillator.stop(now + 3.8);
+  // Duck the background so the sting cuts through.
+  if (bgAudio) fadeTo(bgAudio, BG_VOLUME * 0.3, 250);
+
+  const aha = new Audio(AHA_SRC);
+  aha.volume = 0.75;
+
+  aha.play().catch(() => {
+    // If the sting can't play (network error, blocked), restore the bg.
+    if (bgAudio) fadeTo(bgAudio, BG_VOLUME, 500);
+    return;
+  });
+
+  // After 2s of full-volume playback, begin fading the sting out over 2.2s.
+  // Then pause it and bring the background back up.
+  window.setTimeout(() => {
+    fadeTo(aha, 0, 6000, () => {
+      aha.pause();
+      if (bgAudio) fadeTo(bgAudio, BG_VOLUME, 900);
     });
+  }, 2000);
 }
 
 export function playSound(name: SoundName) {

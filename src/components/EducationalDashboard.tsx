@@ -128,7 +128,7 @@ type ModalState =
 const PROFILE = {
   name: "MHD Salem Alrez",
   initials: "MS",
-  photo: "/CVFINALE.jpeg",
+  photo: "/portfolio/CVFINALE.jpeg",
   role: "ICT Engineering Student · Full-Stack Developer",
   status: "Active Student · Graduating July 2027",
   description:

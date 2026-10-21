@@ -14,6 +14,7 @@ export default function JobMapPage({ onBack }: { onBack: () => void }) {
 
   useEffect(() => {
     setRainDucked(true);
+    playDiscoveryAha("projects");
     return () => setRainDucked(false);
   }, []);
 
